@@ -8,6 +8,12 @@ def names():
     return js_list(["Celia", "Queipe", "Lelso", "Fezio"])
 
 
+@pytest.fixture
+def numbers():
+    """Nosso cenário (word) temos a seguinte palavra"""
+    return js_list([0, 1, 2, 3])
+
+
 word = ""
 
 
@@ -17,7 +23,7 @@ def inc_first_char(string: str, index: int):
     word += str(index)
 
 
-def get_first_char(string: str, index: int):
+def get_first_char(string: str):
     return string[0]
 
 
@@ -29,3 +35,12 @@ def test_for_each(names):
 def test_map(names):
     result = names.map(get_first_char)
     assert result == ["C", "Q", "L", "F"]
+
+
+def number_sum(acc, num):
+    return acc + num
+
+
+def test_reduce(numbers):
+    result = numbers.reduce(number_sum, 10)
+    assert result == 16

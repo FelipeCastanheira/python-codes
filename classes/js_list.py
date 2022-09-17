@@ -16,20 +16,29 @@ class js_list:
         index = 0
         result = []
         for element in self.custom_list:
-            result.append(callback(element, index))
+            result.append(callback(element))
             index += 1
         return result
 
+    def reduce(self, callback, initial):
+        result = initial
+        for element in self.custom_list:
+            result = callback(result, element)
+        return result
 
-# names = js_list(['Celia', 'Queipe', 'Lelso', 'Fezio'])
-# word = ''
 
-# def inc_first_char(string: str, index: int):
-#   word += string[0]
-#   word += str(index)
+numbers = js_list(range(11))
 
-# def run_for_each(word):
-#   names.for_each(inc_first_char)
-#   return word # == 'C0Q1L2F3'
 
-print('run_for_each()')
+def to_square(num):
+    return num * num
+
+
+def exp_two(num):
+    return 2 ** num
+
+
+scaleNums = numbers.map(to_square)
+expNums = numbers.map(exp_two)
+
+print("numbers: ", expNums)
